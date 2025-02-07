@@ -1,10 +1,18 @@
-var http = require('http');
-var util = require('util');
+const https = require('https');
+const fs = require('fs');
+const util = require('util');
 
-http.createServer(function (req, res) {
+const httpsOptions = {
+  cert: fs.readFileSync('./server.crt'),
+  ca: fs.readFileSync('./server.crt'),
+  key: fs.readFileSync('./server.key'),
+};
+
+https.createServer(httpsOptions, (req, res) => {  
     const headers = {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'OPTIONS, POST, GET',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
         'Access-Control-Max-Age': 2592000, // 30 days
         /** add other headers as per requirement */
         'content-type': 'application/json'
