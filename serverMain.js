@@ -1,9 +1,14 @@
 var http = require('http');
+var util = require('util');
 
 http.createServer(function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
     res.setHeader('Access-Control-Allow-Headers', '*');
+    console.log(util.inspect(req, {
+        depth: 5,
+        colors: true,
+      }));
     
     var date = new Date();
     const data = {
